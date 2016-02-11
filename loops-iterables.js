@@ -129,14 +129,35 @@ console.assert(fizzbuzz(10) === "..fizz.buzzfizz..fizzbuzz")
  words and returns the longest word.
  * i.e. findLongestWord("a book full of dogs") should return "book"
  */
+var alphabet = "qwertyuiopasdfghjklzxcvbnm1234567890 "
+
+var contains = function(sequence, element) {
+    if (sequence.indexOf(element) === -1) {
+        return false
+    }
+    return true
+}
+
+var stripPunct = function(inputString) {
+ 	var newString = ""    
+    for (var i = 0; i < inputString.length; i++) {
+        var char = inputString[i]
+        	var caseInsensitiveChar = char.toLowerCase()
+        if (contains(alphabet,caseInsensitiveChar)) { 
+            newString = newString + char
+        }
+}
+    return newString
+}
 
 function findLongestWord(sentence){
     var arr = sentence.split(" ")
     var longestWord = ""
     for (var i = 0; i < arr.length; i++) {
         var word = arr[i]
-        if (longestWord.length < word.length) {
-    		longestWord = word
+        var cleanWord = stripPunct(word)
+        if (longestWord.length < cleanWord.length) {
+            longestWord = cleanWord
         }
     }
     return longestWord
@@ -154,14 +175,16 @@ console.assert(findLongestWord("don't mess with Texas") === "Texas")
  * write a function that returns the Greatest Common Denominator of two numbers
  * - if no GCD exists, return 1
  */
- 
-// Reasoning
-// 1) Use % to find all factors of each input number
-// 2) Create 2 empty arrays
-// 3) Populate each array with factors
-// 4) Compare factors to find equal factors
-// 5) Among equals, find largest factor
-// 6) Return largest factor
+
+var max = 1
+
+var GCD = function(num1, num2) {
+for (var i = 1; i <= num1 || i <= num2; i++) {
+    if(num1%i === 0 && num2%i === 0)
+    max = i
+}
+    return max
+}
 
 
 console.assert(GCD(5,1) === 1);
