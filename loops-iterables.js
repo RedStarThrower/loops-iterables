@@ -5,11 +5,8 @@
  */
 var sumOfArray = function(arr) {
 	var total = 0
-	var i = 0
-	while (i < arr.length) {
-		var el = arr[i]
-		total = total + el
-		i = i + 1
+	for (var i = 0; i < arr.length; i++) {
+		total = total + arr[i]
 	}
 	return total
 }
@@ -26,9 +23,22 @@ console.assert(sumOfArray([10, 9, 8]) === 27);
 // numbers as an argument and finds the highest number.
 
 
+var maxOfArray = function(arr) {
+    var max = arr[0] 
+    for (var i = 0; i < arr.length; i++) {
+        if (typeof arr[i] !== "number") {
+            return NaN
+        }
+        if (max < arr[i]) {
+            max = arr[i]
+        }
+    }
+    return max  
+}
+
 console.assert(maxOfArray([2,4,3]) === 4)
 console.assert(maxOfArray([10,9,8,100,7,6]) === 100)
-console.assert(isNan(maxOfArray([1,2,'bucklemyshoe']))
+console.assert(isNaN(maxOfArray([1,2,'bucklemyshoe'])))
 
 /**
  * PART 2
@@ -38,7 +48,13 @@ console.assert(isNan(maxOfArray([1,2,'bucklemyshoe']))
  */
 
 function isVowel(symbol){
-    // YOUR CODE HERE
+    var vowelsArray = ["A", "a", "E", "e", "O", "o", "I", "i", "U", "u"]
+    for (var i = 0; i < vowelsArray.length; i++) {
+    	if (symbol === vowelsArray[i]) {
+    		return true
+    	}
+    }
+    return false 
 }
 
 console.assert(isVowel(0) === false);
@@ -55,7 +71,13 @@ console.assert(isVowel("E") === true);
  * reverse("skoob") should return the
  * string "books".
  */
-
+var reverse = function(oldString) {
+	var newString = ""
+	for (var i = oldString.length - 1; i >= 0; i--) {
+		newString = newString + oldString[i] 
+	}
+    return newString
+}
 
 console.assert(reverse("books") === "skoob")
 console.assert(reverse("we don't want no trouble") === "elbuort on tnaw t'nod ew")
@@ -71,6 +93,27 @@ console.assert(reverse("we don't want no trouble") === "elbuort on tnaw t'nod ew
  * - for every number that is a multiple of 3 and 5, return "fizzbuzz"
  */
 
+ var fizzbuzz = function (num) {
+ 	var newString = ""
+ 	for (var i = 1; i <= num; i++) {
+        if (i % 3 !== 0 && i % 5 !== 0) { 
+ 		newString = newString + "."
+ 		}
+
+ 		if (i % 3 === 0 && i % 5 !== 0) {
+ 		newString = newString + "fizz"
+ 		}
+
+ 		if (i % 3 !== 0 && i % 5 === 0) {
+ 		newString = newString + "buzz"
+ 		}
+ 	
+ 		if (i % 3 === 0 && i % 5 === 0) {
+ 		newString = newString + "fizzbuzz"
+ 		}
+ 	}
+ 	return newString
+ }
 
 
 console.assert(fizzbuzz(1) === ".")
@@ -88,8 +131,17 @@ console.assert(fizzbuzz(10) === "..fizz.buzzfizz..fizzbuzz")
  */
 
 function findLongestWord(sentence){
-    // YOUR CODE HERE
+    var arr = sentence.split(" ")
+    var longestWord = ""
+    for (var i = 0; i < arr.length; i++) {
+        var word = arr[i]
+        if (longestWord.length < word.length) {
+    		longestWord = word
+        }
+    }
+    return longestWord
 }
+
 
 console.assert(findLongestWord("a book full of dogs") === "book")
 console.assert(findLongestWord("don't mess with Texas") === "Texas")
@@ -102,7 +154,14 @@ console.assert(findLongestWord("don't mess with Texas") === "Texas")
  * write a function that returns the Greatest Common Denominator of two numbers
  * - if no GCD exists, return 1
  */
-
+ 
+// Reasoning
+// 1) Use % to find all factors of each input number
+// 2) Create 2 empty arrays
+// 3) Populate each array with factors
+// 4) Compare factors to find equal factors
+// 5) Among equals, find largest factor
+// 6) Return largest factor
 
 
 console.assert(GCD(5,1) === 1);
